@@ -1,3 +1,9 @@
 module.exports.home = function(req,res){
-    return res.end('<h1> Express is up for Codiel</h1>');
+console.log(req.cookies);
+
+res.cookie('User_Id',25);
+
+    return res.render('home', {
+        title: "Home"
+    });
 }
