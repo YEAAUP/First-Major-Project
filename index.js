@@ -6,21 +6,50 @@ const port = 8000;
 // connecting to mongoose 
 const db=require('./config/mongoos');
 
+
+// Used for session cookie
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
+const MongoStore = require('connect-mongo');
+
+
 app.use(express.urlencoded());
 app.use(cookieParser());
-
-
-
-// use express router
-app.use('/', require('./routes'));
-
-
 
 
 // set up the view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+
+app.use(session({
+    name: 'codeial',
+    // Cahnge the secret key in production mode
+    secret: 'blahsomething',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge:(1000*60*100)
+    },
+    store:MongoStore.create({
+        mongoUrl: 'mongodb://localhost/user_list',
+        autoRemove: 'disabled'
+    },
+    function(err){
+        console.log(err||'connect-mongo setup ok');
+    }
+    )
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
+
+// use express router
+app.use('/', require('./routes'));
 
 app.listen(port, function(err){
     if(err){
