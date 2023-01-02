@@ -1,0 +1,25 @@
+const Comment = require('../models/comment');
+const Post = require('../models/post');
+
+module.exports.create = function(req, res){
+    Post.findById(req.body.post, function(err, post){
+        if(post){
+            console.log("Comment added successfully to database");
+            Comment.create({
+                content: req.body.content,
+                post: req.body.post,
+                user: req.user._id
+            }, function(err, comment){
+                // Handeling the error
+                if(err){
+                    console.log("Error in creating the comment");
+                }
+                console.log(comment);
+                post.comments.push(comment);
+                post.save();
+
+                res.redirect('/');
+            })
+        }
+    })
+}
