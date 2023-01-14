@@ -1,8 +1,6 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-module.exports.home = function(req,res){
-console.log(req.cookies);
-
+module.exports.home = async function(req,res){
 
 //res.cookie('User_Id',25);
 
@@ -13,26 +11,38 @@ console.log(req.cookies);
 //         });
 // })
 
-
-
-//populating the user of each post
-Post.find({})
+try{
+    //populating the user of each post
+let posts = await Post.find({})
+.sort('-createdAt')
 .populate('user')
 .populate({
     path: 'comments',
     populate: {
         path: 'user'
     }
-})
-.exec(function(err, posts){
-    User.find({}, function(err, users){
-        return res.render('home', {
-            title: "Codeial | Home",
-            posts: posts,
-            all_users: users
-            });
-    });
-    
 });
+    
+let users = await User.find({});
+
+    return res.render('home', {
+        title: "Codeial | Home",
+        posts: posts,
+        all_users: users
+        });
+
+}catch(err){
+    console.log('Error',err);
+}
+
 
 }
+
+
+
+// Promises
+// usinf then
+// Post.find({}).populate('comments').then(function());
+
+// let posts = Post.find({}).populate('comments').exec();
+// posts.then();

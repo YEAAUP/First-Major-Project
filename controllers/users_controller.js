@@ -4,6 +4,8 @@
 //     });
 // }
 
+const fs = require('fs');
+const path = require('path');
 
 
 const User = require("../models/user");
@@ -18,14 +20,54 @@ module.exports.profile = function (req, res){
     
 }
 
-module.exports.update = function(req, res){
+module.exports.update = async function(req, res){
+    // if(req.user.id == req.params.id){
+    //     User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+    //         req.flash('success', 'Updated');
+    //         return res.redirect('back');
+    //     });
+    // } else{
+    //     return res.status(401).send('Unauthorized');
+    // }
+
+
+    // Async- await
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+
+        try{
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req,res, function(err){
+                if(err)
+                {
+                    console.log("Multer Error : ", err);
+                }
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                if(req.file){
+                    if(user.avatar){
+                        // Check whether the file is available in the the database or not, if the file is present then only unlink that ---> It is a done later task
+                        fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                    }
+
+                    // this is saving path of the uploaded file into the avatar field in the user
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                return res.redirect('back');
+            });
+
+        }catch(err){
+            req.flash('error', err);
             return res.redirect('back');
-        });
-    } else{
+        }
+
+    }
+    else{
+        req.flash('error', 'Unauthorized');
         return res.status(401).send('Unauthorized');
     }
+
 }
 
 // render the sign up page
@@ -78,15 +120,20 @@ module.exports.create = function(req,res){
 
 // create a seesion for login
 module.exports.createSession = function(req,res){
+    req.flash('success','Logged in Successfully');
     return res.redirect('/');
 }
 
 
 module.exports.destroySession = function(req, res){
-    req.logout(function(err) {
+       
+       req.logout(
+        function(err) {
         if (err) { 
-          return next(err); 
+        req.flash('success','Logged Out Successfully');
+        return next(err); 
           }}
     );
+    req.flash('success','Logged Out Successfully');
     return res.redirect('/');
 }

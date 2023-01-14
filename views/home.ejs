@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="/css/home.css">
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,7 @@
    
 </head>
 <body>
+    <%- include('layout'); %>
     <h1> Codeial <%= title %> </h1>
     <div id="home-container">
         <section id="feed-posts">
@@ -38,7 +40,7 @@
             <% } %>
         </section>
     </div>
-    
+    <script src="/js/home_posts.js"></script>
 
     
 </body>
