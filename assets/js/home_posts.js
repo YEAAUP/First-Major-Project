@@ -6,6 +6,7 @@
         newPostForm.submit(function(e){
             e.preventDefault();
 
+
             $.ajax({
                 type: 'post',
                 url: '/posts/create',
@@ -14,12 +15,27 @@
                     let newPost = newPostDom(data.data.post);
                     $('#posts-lists-container>ul').prepend(newPost);
                     deletePost($(' .delete-post-button', newPost));
+                    // call the create comment class
+                    new PostComments(data.data.post._id);
+
+                    // CHANGE :: enable the functionality of the toggle like button on the new post
+                    new ToggleLike($(' .toggle-like-button', newPost));
+                    new Noty({
+                        theme: 'relax',
+                        text: "Post published!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
                     console.log(data);
                 }, error: function(error){
                     console.log(error.responseText);
                 }
             })
         });
+
+
 
     }
 
@@ -35,12 +51,21 @@
             <small>
             ${post.user.name}
             </small>
+            <br>
+                        <small>
+                            
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+                                    0 Likes
+                                </a>
+                            
+                        </small>
+
             </p>
         </li>
    
     <div class="post-comments">
         
-            <form action="/comments/create" method="post">
+            <form id="post-${ post._id }-comments-form" action="/comments/create" method="post">
                 <input type="text" name="content" placeholder="Type Here to Add Comment" required>
                 <input type="hidden" name="post" value="${post._id}">
                 <input type="submit" value="Add Commnet">
@@ -75,6 +100,20 @@
     }
 
 
+    let convertPostsToAjax = function(){
+        $('#posts-list-container>ul>li').each(function(){
+            let self = $(this);
+            let deleteButton = $(' .delete-post-button', self);
+            deletePost(deleteButton);
+
+            // get the post's id by splitting the id attribute
+            let postId = self.prop('id').split("-")[1]
+            new PostComments(postId);
+        });
+    }
+
+
 
     createPost();
+    convertPostsToAjax();
 }

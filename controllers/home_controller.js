@@ -21,7 +21,8 @@ let posts = await Post.find({})
     populate: {
         path: 'user'
     }
-});
+})
+.populate('likes');
     
 let users = await User.find({});
 
