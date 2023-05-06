@@ -20,7 +20,29 @@ const userSchema = new mongoose.Schema({
     },
     avatar : {
         type: String
-    }
+    },
+    
+    friendships: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Friendship'
+        }
+    ],
+
+    sent_friend_request: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Friendship'
+        }
+    ],
+
+    received_friend_request: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Friendship'
+        }
+    ]
+    
 
 },
 {

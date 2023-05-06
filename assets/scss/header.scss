@@ -1,0 +1,65 @@
+header{
+    margin: 0;
+    width: 100%;
+    height: 8vh;
+    box-sizing: border-box;
+    background-color: rgb(37, 99, 233);
+    display: flex;
+    flex-direction: row;
+    
+    
+
+    #logo{
+
+        width: 20vw;
+        height: 60vh;
+        
+        
+        
+         p{
+            margin: 0 10px 0;
+            width: auto;
+            font-family: cursive;
+            font-size: 40px;
+            color: burlywood;
+        }
+    }
+
+    #nav-bar{
+        width: 80vw;
+
+
+
+        #nav-list{
+            display: flex;
+            flex-direction: row-reverse;
+            list-style-type: none;  
+            font-weight: bold;  
+            font-size: 20px;  
+            padding: 20px;
+           
+            .active a{
+                margin: 20px;
+                padding: 10px;
+                width: 50px;
+                height: 30px;
+                border: transparent;
+                color: black;
+                text-decoration: none;
+                border-radius: 30px;
+               
+            }
+            .active a:hover{
+                background-color: plum;
+            }
+        
+           
+        }
+    }
+    
+    
+
+
+    
+
+}

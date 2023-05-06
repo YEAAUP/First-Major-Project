@@ -1,0 +1,21 @@
+#user-chat-box{
+    border: 2px solid black;
+    margin: 0px;
+    padding: 0px 0px 0px 0px;
+    width: 60%;
+    height: 200px;
+    float: right;
+}
+
+#chat-messages-list{
+    border: 2px solid black;
+    margin: 0px 0px 10px 0px;
+    padding: 10px;
+    height:70%;
+}
+
+
+#chat-message-input-container{
+    position: fixed;
+    flex: auto;
+}

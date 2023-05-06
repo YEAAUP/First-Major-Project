@@ -24,7 +24,31 @@
     <% } else { %> 
         <p><%= profile_user.name %></p>
         <p><%= profile_user.email %></p>
+
+        <% if(friend=="friend") { %>
+        
+            <a href="/friend/remove/<%= friendShipId %>"> Remove Friend </a>
+
+        <% } else if(friend=="received") { %>
+
+            <a href="/friend/reject/<%= friendShipId %>"> Reject Friend </a>
+            <a href="/friend/accept/<%= friendShipId %>"> Accept Friend </a>
+
+        <% } else if(friend=="sent") { %>
+
+            <a href="/friend/withdraw/<%= friendShipId %>"> Withdraw Request </a>
+        
+        <% } else { %> 
+
+            <a href="/friend/send/<%= profile_user.id %>"> Send Request </a>
+        
+        <% } %>
+
+
+
     <% } %>
+
+
 
 </body>
 </html>

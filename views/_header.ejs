@@ -1,22 +1,41 @@
+
+
+
 <header>
-    Page Header
-    <ul>
-        <% if(locals.user){%>
-            <li><%= user.name %> </li>
-            <li>
-                <a href="/users/sign-out">sign out</a>
-            </li>
 
-        <%} else{%>
-            <li>
-                <a href="/users/sign-in">Sign In</a>
-            </li>
-            <li>
-                <a href="/users/sign-up">Sign Up</a>
-            </li>
+	<div id="logo">
+		<p>CONNECT</p>
+	</div>
 
-        <% } %>
-    </ul>
+	<nav id="nav-bar">
+
+		<ul id="nav-list">
+
+			<% if(locals.user){%>
+				<li class="active"><a href="#"><%= user.name %> </a></li>
+				<li class="active">
+					<a href="/users/sign-out">sign out</a>
+				</li>
+	
+			<%} else{%>
+				<li class="active">
+					<a href="/users/sign-in">Sign In</a>
+				</li>
+				<li class="active">
+					<a href="/users/sign-up">Sign Up</a>
+				</li>
+	
+			<% } %>
+
+			<li class="active"><a href="#">About Us</a></li>
+			<li class="active"><a href="#">Contact Us</a></li>
+			<li class="active"><a href="/">Home</a></li>
+
+
+
+		</ul>
+
+	</nav>
 
 
 </header>

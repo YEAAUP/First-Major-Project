@@ -1,45 +1,132 @@
+<%- include('layout'); %>
+<div id="main-content">
 
-<link rel="stylesheet" href="/css/home.css">
-<!DOCTYPE html>
-<html>
-<head>
-    
-    <title> <%= title %> </title>
-    <link rel="stylesheet" href="/css/body.css">
-   
-</head>
-<body>
-    <%- include('layout'); %>
-    <h1> Codeial <%= title %> </h1>
-    <div id="home-container">
-        <section id="feed-posts">
-            <h4>Posts</h4>
-           <% if(locals.user){ %>
-            <form action="/posts/create" id="new-post-form" method="post">
-                <textarea name="content" cols="30" rows="3" placeholder="Type Here" required></textarea>
-                <input type="submit" value="Post">
-            </form>
-           <% } %>
-            <div id="posts-lists-container">
-                <ul>
-                    <% for (post of posts){ %>
-                        <%- include('_post') -%>
-                    <% } %>
-                </ul>
-    
+    <div id="left-side">
+        <% if(locals.user){ %>
+        <div id="top-left">
+            <div>
+                
+                    <form action="/posts/create" id="new-post-form" method="post">
+                        <textarea name="content" cols="30" rows="3" placeholder="Type Here" required></textarea>
+                        <input type="submit" value="Post">
+                    </form>
+                   
             </div>
-    
-        </section>
-    
-        <section id="user-friends">
-            <h4>Friends</h4>
-            <% for(u of all_users) { %>
-                <p>
-                    <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
-                </p>
-            <% } %>
-        </section>
+        </div>
+        <% } %>
+
+        <div id="bottom-left">
+            <ul id="post-list">
+                <% for (post of posts){ %>
+                <%- include('_post') -%>
+                <% } %>
+            </ul>
+        </div>
+
     </div>
+    <div id="right-side">
+        <div id="top-right-container">
+            <% if(locals.user){ %>
+
+            <span id="friend-link"><a href="/friend">Friends</a></span>
+            <span id="request-link"><a href="/request">Request</a></span>
+            <span id="sent-link"><a href="/sent">Sent</a></span>
+            <% if(userType == "friend"){ %>   
+            <div id="friend-container">
+                <% for (friend of friendList.friendships){ %>
+                    <div id="users">
+                        <% if (locals.user._id.equals(friend.from_user._id)) { %>
+                            <%= friend.to_user.name %>
+                            
+                        <% } 
+                        else { %>
+                        <%= friend.from_user.name %>
+
+                        <% } %>
+                        <a href="friend/remove/<%= friend._id %>"> Remove Friend </a>
+                        
+
+                    </div>
+                    
+                    <% } %>
+
+            </div>
+
+            <% } else if(userType=="received") { %>
+            <div id="received-container">
+                <% for (friend of friendList.received_friend_request){ %>
+                    <div id="users">
+
+                        <%= friend.from_user.name %>
+                        <a href="friend/reject/<%= friend._id %>"> Reject Friend </a>
+                        <a href="friend/accept/<%= friend._id %>"> Accept Friend </a>
+
+                        
+
+                    </div>
+                    
+                    <% } %>
+
+            </div>
+            <% } else if(userType=="sent") { %>
+            <div id="sent-container">
+                <% for (friend of friendList.sent_friend_request){ %>
+                    <div id="users">
+                        
+                        <%= friend.to_user.name%>
+                        <a href="friend/withdraw/<%= friend._id %>"> Withdraw Request </a>
+                        
+
+                    </div>
+                    
+                <% } %>
+
+            </div>
+            <% } %>
+
+
+
+            <% } %> 
+            
+        </div>
+        <div id="bottom-right-container"></div>
+        <div id="friends-list">
+            <p>
+                Friends
+            </p>
+        </div>
+
+        <div id="users-list">
+            <p>
+                Users
+                <br>
+                <% for (user of userList){ %>
+                    <div id="users">
+                        <%= user.name %>
+
+                        <a href="/users/profile/<%= user._id %>">View Profile</a>
+                    </div>
+                    
+                    
+                <% } %>
+
+                
+                
+                
+
+
+
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+    <div>
+        <%- include('_footer'); %>
+    </div>
+    
     <script src="/js/home_post_comments.js" ></script>
     <script src="/js/home_posts.js"></script>
 
@@ -50,7 +137,3 @@
             let toggleLike = new ToggleLike(self);
         });
     </script>
-
-    
-</body>
-</html>

@@ -1,16 +1,32 @@
 <%- include('layout'); %>
-<h1>Sign UP</h1>
 
-<form action="/users/create" method="post">
-    <input type="text" name="name" placeholder="Your name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-    <input type="submit" value="Sign Up">
-    
+<head>
+    <link rel="stylesheet" href="/css/sign.css">
+</head>
 
-</form>
+<form action="/users/create-session" method="post">
+    <div class="imgcontainer">
+      <img src="../images/sign.png" alt="Avatar" class="avatar">
+    </div>
+  
+    <div class="sign-container">
+       <label for="uname"><b>Name</b></label>
+       <input type="text" name="name" placeholder="Your name" required>
 
-<p>
-    <a href="/users/auth/google"> Google Sign In/Sign Up</a>
-</p>
+      <label for="email"><b>Email</b></label>
+      <input type="email" name="email" placeholder="Your Email" required>
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+
+      <label for="psw"><b>Confirm Password</b></label>
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+  
+      <button type="submit" value="Sign Un">Sign Up</button>
+    </div>
+  
+  </form>
+  <div id="google-container">
+    <a href="/users/auth/google"> <img src="../images/google-sign.png" alt="Avatar"></a>
+  </div>
+

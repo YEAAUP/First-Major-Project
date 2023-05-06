@@ -1,0 +1,86 @@
+<%- include('layout'); %>
+<div id="main-content">
+
+    <div id="left-side">
+        <div id="top-left">
+            <div>
+                <% if(locals.user){ %>
+                    <form action="/posts/create" id="new-post-form" method="post">
+                        <textarea name="content" cols="30" rows="3" placeholder="Type Here" required></textarea>
+                        <input type="submit" value="Post">
+                    </form>
+                   <% } %>
+            </div>
+        </div>
+
+        <div id="bottom-left">
+            <ul id="post-list">
+                <% for (post of posts){ %>
+                <%- include('_post') -%>
+                <% } %>
+            </ul>
+        </div>
+
+    </div>
+    <div id="right-side">
+        <p>
+            Right
+        </p>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- 
+    <div id="home-container">
+        <section id="feed-posts">
+            <h4>Posts</h4>
+           <% if(locals.user){ %>
+            <form action="/posts/create" id="new-post-form" method="post">
+                <textarea name="content" cols="30" rows="3" placeholder="Type Here" required></textarea>
+                <input type="submit" value="Post">
+            </form>
+           <% } %>
+            <div id="posts-lists-container">
+                <ul>
+                    <% for (post of posts){ %>
+                        <%- include('_post') -%>
+                    <% } %>
+                </ul>
+    
+            </div>
+    
+        </section>
+    
+        <section id="user-friends">
+            <h4>Friends</h4>
+            <% for(u of all_users) { %>
+                <p>
+                    <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+                </p>
+            <% } %>
+
+            <%- include('_chat_box') -%>
+            
+        
+        </section>
+    </div> -->
+    <div>
+        <%- include('_footer'); %>
+    </div>
+    
+    <script src="/js/home_post_comments.js" ></script>
+    <script src="/js/home_posts.js"></script>
+
+    <script src="/js/toggle_likes.js"></script>
+    <script>
+        $('.toggle-like-button').each(function(){
+            let self = this;
+            let toggleLike = new ToggleLike(self);
+        });
+    </script>

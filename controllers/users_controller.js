@@ -6,17 +6,48 @@
 
 const fs = require('fs');
 const path = require('path');
+const Friend = require('../models/friendship');
 
 
 const User = require("../models/user");
 
-module.exports.profile = function (req, res){
-    User.findById(req.params.id, function(err, user){
-        return res.render('user_profile', {
-            title: 'User Profile',
-            profile_user: user
-        });
+module.exports.profile = async function (req, res){
+
+    try{
+        console.log(req.params.id)
+    let friendShip = await Friend.find({$or:[{from_user:req.params.id, to_user:req.user._id},
+    {from_user:req.user._id,to_user:req.params.id}]}
+    );
+    console.log(friendShip);
+    let friend;
+    let friendShipId=null;
+    if(friendShip.length>0){
+        console.log(friendShip[0].accepted);
+        if(friendShip[0].accepted){
+            friend="friend";
+        }
+        else{
+            if(friendShip[0].to_user==req.user._id){
+                friend="received";
+            }
+            else{
+                friend="sent";
+            }
+        }
+        friendShipId=friendShip[0]._id;
+    }
+
+    let user = await User.findById(req.params.id);
+    return res.render('user_profile', {
+        title: 'User Profile',
+        profile_user: user,
+        friend:friend,
+        friendShipId:friendShipId
     });
+}
+    catch(err){
+        console.log(err);
+    }
     
 }
 
@@ -78,6 +109,7 @@ module.exports.signUp = function(req, res){
     return res.render('user_sign_up'),{
         title: "Codeial | Sign Up"
     }
+
 }
 
 // render the sign in page

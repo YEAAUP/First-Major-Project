@@ -1,15 +1,31 @@
 <%- include('layout'); %>
-
-<h1>Sign In</h1>
-
+<head>
+    <link rel="stylesheet" href="/css/sign.css">
+</head>
 <form action="/users/create-session" method="post">
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="submit" value="Sign In">
+    <div class="imgcontainer">
+      <img src="../images/sign.png" alt="Avatar" class="avatar">
+    </div>
+  
+    <div class="sign-container">
+      <label for="uname"><b>Email</b></label>
+      <input type="email" name="email" placeholder="Your Email" required>
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+  
+      <button type="submit" value="Sign In">Login</button>
+      
     
+    </div>
+    
+  
+    <div class="sign-container" style="background-color:#f1f1f1">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+  <div id="google-container">
+    <a href="/users/auth/google"> <img src="../images/google-sign.png" alt="Avatar"></a>
+  </div>
 
-</form>
-
-<p>
-    <a href="/users/auth/google"> Google Sign In/Sign Up</a>
-</p>

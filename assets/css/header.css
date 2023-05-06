@@ -1,0 +1,50 @@
+header {
+  margin: 0;
+  width: 100%;
+  height: 8vh;
+  box-sizing: border-box;
+  background-color: #2563e9;
+  display: flex;
+  flex-direction: row;
+}
+
+header #logo {
+  width: 20vw;
+  height: 60vh;
+}
+
+header #logo p {
+  margin: 0 10px 0;
+  width: auto;
+  font-family: cursive;
+  font-size: 40px;
+  color: burlywood;
+}
+
+header #nav-bar {
+  width: 80vw;
+}
+
+header #nav-bar #nav-list {
+  display: flex;
+  flex-direction: row-reverse;
+  list-style-type: none;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px;
+}
+
+header #nav-bar #nav-list .active a {
+  margin: 20px;
+  padding: 10px;
+  width: 50px;
+  height: 30px;
+  border: transparent;
+  color: black;
+  text-decoration: none;
+  border-radius: 30px;
+}
+
+header #nav-bar #nav-list .active a:hover {
+  background-color: plum;
+}
