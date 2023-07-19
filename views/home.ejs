@@ -25,25 +25,42 @@
 
     </div>
     <div id="right-side">
-        <div id="top-right-container">
+        <div id="friends-list">
+            
             <% if(locals.user){ %>
-
-            <span id="friend-link"><a href="/friend">Friends</a></span>
-            <span id="request-link"><a href="/request">Request</a></span>
-            <span id="sent-link"><a href="/sent">Sent</a></span>
+            <div id="navLinks">
+                <ul>
+                    <li><a class="menulink" href="/friend">Friends</a></li>
+                    <li><a class="menulink" href="/request">Requests</a></li>
+                    <li><a class="menulink" href="/sent">Sent</a></li>
+                </ul>   
+            </div>
+            
             <% if(userType == "friend"){ %>   
             <div id="friend-container">
+                <div class="friendType"> <span> Friends </span> </div>
                 <% for (friend of friendList.friendships){ %>
-                    <div id="users">
+                    <div class="friendship">
                         <% if (locals.user._id.equals(friend.from_user._id)) { %>
-                            <%= friend.to_user.name %>
+                            <p>
+                                <%= friend.to_user.name %>
+                            </p>
+                            
                             
                         <% } 
                         else { %>
-                        <%= friend.from_user.name %>
+                            <p>
+                                <%= friend.from_user.name %>
+                            </p>
+                        
 
                         <% } %>
-                        <a href="friend/remove/<%= friend._id %>"> Remove Friend </a>
+                        <a href="friend/remove/<%= friend._id %>"> 
+                            <button>
+                                Remove
+                            </button>
+                             
+                        </a>
                         
 
                     </div>
@@ -54,12 +71,15 @@
 
             <% } else if(userType=="received") { %>
             <div id="received-container">
+                <div class="friendType"> <span> Friend Requests </span> </div>
                 <% for (friend of friendList.received_friend_request){ %>
-                    <div id="users">
-
-                        <%= friend.from_user.name %>
-                        <a href="friend/reject/<%= friend._id %>"> Reject Friend </a>
-                        <a href="friend/accept/<%= friend._id %>"> Accept Friend </a>
+                    <div class="friendship">
+                        <p>
+                            <%= friend.from_user.name %>
+                        </p>
+                        
+                        <a href="friend/reject/<%= friend._id %>"> <button>Reject</button> </a>
+                        <a href="friend/accept/<%= friend._id %>"> <button>Accept</button> </a>
 
                         
 
@@ -70,11 +90,18 @@
             </div>
             <% } else if(userType=="sent") { %>
             <div id="sent-container">
+                <div class="friendType"> <span> Request Sent </span></div>
                 <% for (friend of friendList.sent_friend_request){ %>
-                    <div id="users">
+                    <div class="friendship">
+                        <p>
+                            <%= friend.to_user.name%>
+                        </p>
                         
-                        <%= friend.to_user.name%>
-                        <a href="friend/withdraw/<%= friend._id %>"> Withdraw Request </a>
+                        <a href="friend/withdraw/<%= friend._id %>">
+                            <button>
+                                Withdraw 
+                            </button>
+                        </a>
                         
 
                     </div>
@@ -89,31 +116,29 @@
             <% } %> 
             
         </div>
-        <div id="bottom-right-container"></div>
-        <div id="friends-list">
-            <p>
-                Friends
-            </p>
-        </div>
 
         <div id="users-list">
             <p>
-                Users
-                <br>
+                <h3>
+                    Users
+                </h3>
+                
                 <% for (user of userList){ %>
                     <div id="users">
-                        <%= user.name %>
+                        <p>
+                            <%= user.name %>
+                        </p>
+                        
 
-                        <a href="/users/profile/<%= user._id %>">View Profile</a>
+                        <a href="/users/profile/<%= user._id %>">
+                            <button>
+                                view profile
+                            </button>
+                        </a>
                     </div>
                     
                     
                 <% } %>
-
-                
-                
-                
-
 
 
             </p>
@@ -137,3 +162,4 @@
             let toggleLike = new ToggleLike(self);
         });
     </script>
+    

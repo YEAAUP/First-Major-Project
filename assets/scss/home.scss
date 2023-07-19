@@ -360,24 +360,156 @@
 
     #right-side{
         flex: 3;
-        background-color:darkolivegreen;
         display: flex;
         flex-direction: column;
+        background-color: #dee1e0;
+        margin: 0;
+        padding: 0;
 
         #friends-list{
-            margin: 10px 10px 30px;
-            background-color: aquamarine;
+            margin: 10px 10px 0;
+            max-height: 50%;
+            overflow-y: scroll;
 
+            #navLinks{
+                ul {
+                    list-style-type: none;
+                    margin: 0 15px 10px;
+                    padding: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: azure;
+                    font-size: 20px;
+
+                    li{
+                        padding: 0;
+                        margin: 0 15px;
+                    }
+
+                  }
+                  
+                  li {
+                    float: left;
+                  }
+                  
+                  li a {
+                    display: block;
+                    text-align: center;
+                    padding: 5px 8px;
+                    text-decoration: none;
+                  }
+                  
+                  /* Change the link color to #111 (black) on hover */
+                  li a:hover {
+                    color: white;
+                    background-color: rgb(41, 97, 236);
+                    border-radius: 5px;
+                  }
+
+                 
+
+                 
+            }
+          
+            .friendType{
+                text-align: center;
+                margin: 0 10px 10px;
+                font-size: 15px;
+                padding: 2px;
+
+                span {
+                    font-size: 15px;
+                    padding: 5px;
+                    background-color: rgb(117, 187, 211);
+                    box-sizing: border-box;
+                    border-radius: 5px;
+                }
+                
+            }
+        
+            
+
+            .friendship {
+                height: 30px;
+                margin: 5px 5px;
+                padding: 3px;
+                display: flex;
+                border-bottom: 1px solid rgb(248, 245, 245);
+                font-size: medium;
+                line-height: 125%;
+                >p{
+                    margin-left: 10px;
+                    width: 60%;
+                }
+                > a{
+                    padding-bottom: 5px;
+                    margin-left: 10px;
+                    font-size: 2em;
+                    transition: transform .3s ease-out;
+                    display: inline-block;
+                    > button{
+                        padding: 5px;
+                        box-sizing: border-box;
+                        border: 2px solid whitesmoke;
+                        color: white;
+                        background-color: rgb(34, 76, 245);
+                        border-radius: 6px;
+                        
+                    }
+                    :hover{
+                        transform: translate(0, -3px);
+                    }
+                }
+            }
+           
         }
 
         #users-list{
-            margin: 10px 10px 10px;
-            background-color: bisque;
+            margin: 20px 10px 0px;
+            border-top: 1px solid rgb(146, 115, 115);
+            padding: 5px 0 0;
+            overflow-y: scroll;
 
+            >h3{
+                margin-left: 10px;
+                margin-bottom: 5px;
+                text-align: center;
+            }
+            
             #users{
+                height: 30px;
                 margin: 5px 15px;
                 padding: 3px;
-
+                display: flex;
+                border-bottom: 1px solid rgb(243, 245, 246);
+                font-size: medium;
+                line-height: 125%;
+                align-items: center;
+                justify-content: center;
+                >p{
+                    margin-left: 15px;
+                    flex: 8;
+                }
+                > a{
+                    flex: 4;
+                    margin-left: 10px;
+                    font-size: 2em;
+                    transition: transform .3s ease-out;
+                    display: inline-block;
+                    > button{
+                        padding: 3px;
+                        box-sizing: border-box;
+                        border: 2px solid whitesmoke;
+                        color: white;
+                        background-color: rgb(34, 76, 245);
+                        border-radius: 2px;
+                        
+                    }
+                    :hover{
+                        transform: translate(0, -5px);
+                    }
+                }
             }
         }
 

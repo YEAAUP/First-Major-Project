@@ -306,22 +306,154 @@
 
 #main-content #right-side {
   flex: 3;
-  background-color: darkolivegreen;
   display: flex;
   flex-direction: column;
+  background-color: #dee1e0;
+  margin: 0;
+  padding: 0;
 }
 
 #main-content #right-side #friends-list {
-  margin: 10px 10px 30px;
-  background-color: aquamarine;
+  margin: 10px 10px 0;
+  max-height: 50%;
+  overflow-y: scroll;
+}
+
+#main-content #right-side #friends-list #navLinks {
+  /* Change the link color to #111 (black) on hover */
+}
+
+#main-content #right-side #friends-list #navLinks ul {
+  list-style-type: none;
+  margin: 0 15px 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: azure;
+  font-size: 20px;
+}
+
+#main-content #right-side #friends-list #navLinks ul li {
+  padding: 0;
+  margin: 0 15px;
+}
+
+#main-content #right-side #friends-list #navLinks li {
+  float: left;
+}
+
+#main-content #right-side #friends-list #navLinks li a {
+  display: block;
+  text-align: center;
+  padding: 5px 8px;
+  text-decoration: none;
+}
+
+#main-content #right-side #friends-list #navLinks li a:hover {
+  color: white;
+  background-color: #2961ec;
+  border-radius: 5px;
+}
+
+#main-content #right-side #friends-list .friendType {
+  text-align: center;
+  margin: 0 10px 10px;
+  font-size: 15px;
+  padding: 2px;
+}
+
+#main-content #right-side #friends-list .friendType span {
+  font-size: 15px;
+  padding: 5px;
+  background-color: #75bbd3;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+#main-content #right-side #friends-list .friendship {
+  height: 30px;
+  margin: 5px 5px;
+  padding: 3px;
+  display: flex;
+  border-bottom: 1px solid #f8f5f5;
+  font-size: medium;
+  line-height: 125%;
+}
+
+#main-content #right-side #friends-list .friendship > p {
+  margin-left: 10px;
+  width: 60%;
+}
+
+#main-content #right-side #friends-list .friendship > a {
+  padding-bottom: 5px;
+  margin-left: 10px;
+  font-size: 2em;
+  transition: transform .3s ease-out;
+  display: inline-block;
+}
+
+#main-content #right-side #friends-list .friendship > a > button {
+  padding: 5px;
+  box-sizing: border-box;
+  border: 2px solid whitesmoke;
+  color: white;
+  background-color: #224cf5;
+  border-radius: 6px;
+}
+
+#main-content #right-side #friends-list .friendship > a :hover {
+  transform: translate(0, -3px);
 }
 
 #main-content #right-side #users-list {
-  margin: 10px 10px 10px;
-  background-color: bisque;
+  margin: 20px 10px 0px;
+  border-top: 1px solid #927373;
+  padding: 5px 0 0;
+  overflow-y: scroll;
+}
+
+#main-content #right-side #users-list > h3 {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 #main-content #right-side #users-list #users {
+  height: 30px;
   margin: 5px 15px;
   padding: 3px;
+  display: flex;
+  border-bottom: 1px solid #f3f5f6;
+  font-size: medium;
+  line-height: 125%;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-content #right-side #users-list #users > p {
+  margin-left: 15px;
+  flex: 8;
+}
+
+#main-content #right-side #users-list #users > a {
+  flex: 4;
+  margin-left: 10px;
+  font-size: 2em;
+  transition: transform .3s ease-out;
+  display: inline-block;
+}
+
+#main-content #right-side #users-list #users > a > button {
+  padding: 3px;
+  box-sizing: border-box;
+  border: 2px solid whitesmoke;
+  color: white;
+  background-color: #224cf5;
+  border-radius: 2px;
+}
+
+#main-content #right-side #users-list #users > a :hover {
+  transform: translate(0, -5px);
 }
